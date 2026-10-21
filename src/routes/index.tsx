@@ -40,10 +40,10 @@ function useTyped(lines: string[]) {
       c++;
       setOut((prev) => {
         const next = [...prev];
-        next[l] = lines[l].slice(0, c);
+        next[l] = (lines[l] ?? "").slice(0, c);
         return next;
       });
-      if (c >= lines[l].length) { l++; c = 0; setOut((p) => (l < lines.length ? [...p, ""] : p)); }
+      if (c >= (lines[l] ?? "").length) { l++; c = 0; setOut((p) => (l < lines.length ? [...p, ""] : p)); }
     }, 38);
     return () => clearInterval(id);
   }, [lines]);
@@ -57,7 +57,7 @@ function Index() {
 
   useEffect(() => {
     const order: StateKey[] = ["idle", "done", "load", "battery"];
-    const id = setInterval(() => setState((p) => order[(order.indexOf(p) + 1) % order.length]), 4200);
+    const id = setInterval(() => setState((p) => order[(order.indexOf(p) + 1) % order.length] ?? "idle"), 4200);
     return () => clearInterval(id);
   }, []);
 
