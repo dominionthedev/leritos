@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000" fill="none">
+  <title>Rose-violet infinity ribbon on dark background with heavy scratchy texture</title>
+  <desc>A smooth, translucent infinity-inspired ribbon with rose and violet accents on a deep dark (#100e14) background with pronounced scratchy grain and directional scratches. Ribbon centered.</desc>
+  <defs>
+    <!-- Heavy grain -->
+    <filter id="heavyGrain" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="5" seed="3" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.55 0" in="noise" result="grain"/>
+    </filter>
+
+    <!-- Directional scratches (horizontal-ish) -->
+    <filter id="scratchesH" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="turbulence" baseFrequency="0.015 1.8" numOctaves="3" seed="12" stitchTiles="stitch" result="lines"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.45 0" in="lines" result="scratchLines"/>
+    </filter>
+
+    <!-- Secondary angled scratches -->
+    <filter id="scratchesA" x="0%" y="0%" width="100%" height="100%" color-interpolation-filters="sRGB">
+      <feTurbulence type="turbulence" baseFrequency="1.6 0.04" numOctaves="2" seed="42" stitchTiles="stitch" result="lines2"/>
+      <feColorMatrix type="matrix" values="
+        1 0 0 0 0
+        0 1 0 0 0
+        0 0 1 0 0
+        0 0 0 0.35 0" in="lines2" result="scratchLines2"/>
+    </filter>
+
+    <linearGradient id="ribbon" x1="270" y1="430" x2="1110" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fa477e"/>
+      <stop offset=".18" stop-color="#e85cbd"/>
+      <stop offset=".36" stop-color="#9a59f5"/>
+      <stop offset=".52" stop-color="#e64eaa"/>
+      <stop offset=".68" stop-color="#8650ed"/>
+      <stop offset=".86" stop-color="#a35cf2"/>
+      <stop offset="1" stop-color="#d94da9"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="340" y1="350" x2="1040" y2="690" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffeff8" stop-opacity=".95"/>
+      <stop offset=".45" stop-color="#f9dcff" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#fff0fb" stop-opacity=".92"/>
+    </linearGradient>
+    <filter id="glow" x="100" y="190" width="1200" height="650" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+    <filter id="softShadow" x="150" y="220" width="1100" height="600" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <linearGradient id="innerShade" x1="420" y1="370" x2="930" y2="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#6f2bb9" stop-opacity=".05"/>
+      <stop offset=".48" stop-color="#3d176f" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#4a1c91" stop-opacity=".06"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Solid dark background -->
+  <rect width="1400" height="1000" fill="#100e14"/>
+
+  <!-- Heavy scratch layers -->
+  <rect width="1400" height="1000" fill="#ffffff" opacity="0.22" filter="url(#heavyGrain)"/>
+  <rect width="1400" height="1000" fill="#ffffff" opacity="0.18" filter="url(#scratchesH)"/>
+  <rect width="1400" height="1000" fill="#ffffff" opacity="0.14" filter="url(#scratchesA)"/>
+
+  <!-- Centered ribbon group (shifted right +30, down +30) -->
+  <g transform="translate(30, 30)">
+
+    <!-- Soft cast shadow -->
+    <path d="M447 551
+             C385 660 262 637 250 539
+             C237 432 351 364 452 413
+             C525 448 572 512 638 551
+             C704 591 777 644 879 621
+             C1014 590 1088 493 1044 389
+             C1003 292 868 281 763 329
+             C696 360 657 408 628 460"
+          stroke="#6433a2" stroke-width="83" stroke-linecap="round" stroke-linejoin="round"
+          opacity=".28" filter="url(#softShadow)" transform="translate(0 18)"/>
+
+    <!-- Luminous underglow -->
+    <path d="M447 551
+             C385 660 262 637 250 539
+             C237 432 351 364 452 413
+             C525 448 572 512 638 551
+             C704 591 777 644 879 621
+             C1014 590 1088 493 1044 389
+             C1003 292 868 281 763 329
+             C696 360 657 408 628 460"
+          stroke="#e65adf" stroke-width="88" stroke-linecap="round" stroke-linejoin="round"
+          opacity=".48" filter="url(#glow)"/>
+
+    <!-- Main continuous ribbon -->
+    <path d="M447 551
+             C385 660 262 637 250 539
+             C237 432 351 364 452 413
+             C525 448 572 512 638 551
+             C704 591 777 644 879 621
+             C1014 590 1088 493 1044 389
+             C1003 292 868 281 763 329
+             C696 360 657 408 628 460"
+          stroke="url(#ribbon)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Gentle dimensional shading -->
+    <path d="M447 551
+             C385 660 262 637 250 539
+             C237 432 351 364 452 413
+             C525 448 572 512 638 551
+             C704 591 777 644 879 621
+             C1014 590 1088 493 1044 389
+             C1003 292 868 281 763 329
+             C696 360 657 408 628 460"
+          stroke="url(#innerShade)" stroke-width="49" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Satin highlights along the upper edges -->
+    <path d="M276 485
+             C293 412 371 383 438 416
+             C510 452 571 520 638 551"
+          stroke="url(#edge)" stroke-width="7" stroke-linecap="round" opacity=".88"/>
+    <path d="M650 433
+             C688 364 759 320 843 314
+             C930 308 1000 344 1035 405"
+          stroke="url(#edge)" stroke-width="7" stroke-linecap="round" opacity=".92"/>
+    <path d="M1018 533
+             C979 592 922 620 867 623"
+          stroke="#d8b8ff" stroke-width="5" stroke-linecap="round" opacity=".68"/>
+    <path d="M283 568
+             C306 619 367 633 410 608"
+          stroke="#ffb5dc" stroke-width="5" stroke-linecap="round" opacity=".65"/>
+
+    <!-- Small reflected glints -->
+    <path d="M331 409 C361 390 395 390 420 401" stroke="#fff7fc" stroke-width="3" stroke-linecap="round" opacity=".82"/>
+    <path d="M824 309 C866 296 912 304 941 319" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+    <circle cx="650" cy="432" r="5" fill="#fff5ff" opacity=".85"/>
+    <circle cx="446" cy="551" r="4" fill="#ffe5f7" opacity=".8"/>
+  </g>
+</svg>
