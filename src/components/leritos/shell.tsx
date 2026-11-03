@@ -1,6 +1,7 @@
 import { Link, useRouterState } from '@tanstack/react-router';
 import type { ReactNode } from 'react';
 import { ViewportFlow } from '@/design/leritos/viewport';
+import { Stage } from '@/design/leritos/stage';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import logo from '@/assets/leritos.svg.asset.json';
@@ -17,8 +18,8 @@ export function SiteShell({children}: {children: ReactNode}) {
 }
 export function Eyebrow({children}: {children: ReactNode}) {return <p className="eyebrow"><span className="eyebrow-marker"/>{children}</p>;}
 export function PageIntro({number,title,accent,description}: {number:string;title:string;accent:string;description:string}) {
-  return <header className="page-intro content-width"><Eyebrow>{number} / THE AUGMENTED TERMINAL DESKTOP</Eyebrow><h1>{title}<br/><span className="text-accent">{accent}</span></h1><p className="intro-description">{description}</p></header>;
+  return <Stage as="header" className="page-intro content-width"><Eyebrow>{number} / THE AUGMENTED TERMINAL DESKTOP</Eyebrow><h1>{title}<br/><span className="text-accent">{accent}</span></h1><p className="intro-description">{description}</p></Stage>;
 }
 export function NextPage({to,label,description}: {to: '/workspace'|'/reactivity'|'/ecosystem'|'/vision';label:string;description:string}) {
-  return <div className="next-section content-width"><div><Eyebrow>KEEP EXPLORING</Eyebrow><h2>{description}</h2></div><Button asChild variant="outline" size="lg"><Link to={to}>{label}<ArrowRight/></Link></Button></div>;
+  return <Stage as="div" className="next-section content-width"><div><Eyebrow>KEEP EXPLORING</Eyebrow><h2>{description}</h2></div><Button asChild variant="outline" size="lg"><Link to={to}>{label}<ArrowRight/></Link></Button></Stage>;
 }
