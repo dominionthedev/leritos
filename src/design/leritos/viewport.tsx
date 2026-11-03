@@ -19,8 +19,10 @@ export function ViewportFlow({children, pageKey}: {children:ReactNode;pageKey:st
       },{root,threshold:0,rootMargin:"0px 0px -8% 0px"});
       for(const stage of stages){stage.dataset['stage']='hidden';observer.observe(stage);}
     };
-    frame=requestAnimationFrame(install);
-    const mutation=new MutationObserver(()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(install);});
+    // Macrotask, not animation frame: React finishes hydrating streamed content
+    // first, so stamping stages never races hydration.
+    frame=setTimeout(install,0);
+    const mutation=new MutationObserver(()=>{clearTimeout(frame);frame=setTimeout(install,0);});
     mutation.observe(root,{childList:true});
     return ()=>{cancelAnimationFrame(frame);observer?.disconnect();mutation.disconnect();};
   },[pageKey]);
