@@ -1,30 +1,20 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 
+/**
+ * Owns the page body: the scrolling element, the scroll reset on navigation, and
+ * the gate class that switches reveal motion on once the app has taken over.
+ *
+ * Content blocks opt into the reveal themselves with <Stage>, which keeps every
+ * rendered attribute under React's control. Without this class the page reads as
+ * plain, unanimated content — which is what a browser without JavaScript gets.
+ */
 export function ViewportFlow({children, pageKey}: {children:ReactNode;pageKey:string}) {
   const main = useRef<HTMLElement>(null);
   useEffect(()=>{
     const root=main.current;
     if(!root) return;
     root.scrollTop=0;
-    let observer: IntersectionObserver | undefined;
-    let frame=0;
-    const install=()=>{
-      observer?.disconnect();
-      const stages=Array.from(root.children).filter((el):el is HTMLElement=>el instanceof HTMLElement);
-      root.classList.add('viewport-motion');
-      observer=new IntersectionObserver(entries=>{
-        for(const entry of entries){
-          (entry.target as HTMLElement).dataset['stage']=entry.isIntersecting?'visible':'hidden';
-        }
-      },{root,threshold:0,rootMargin:"0px 0px -8% 0px"});
-      for(const stage of stages){stage.dataset['stage']='hidden';observer.observe(stage);}
-    };
-    // Macrotask, not animation frame: React finishes hydrating streamed content
-    // first, so stamping stages never races hydration.
-    frame=setTimeout(install,0);
-    const mutation=new MutationObserver(()=>{clearTimeout(frame);frame=setTimeout(install,0);});
-    mutation.observe(root,{childList:true});
-    return ()=>{clearTimeout(frame);observer?.disconnect();mutation.disconnect();};
+    root.classList.add('viewport-motion');
   },[pageKey]);
   return <main ref={main} className="site-main" id="main-content">{children}</main>;
 }
