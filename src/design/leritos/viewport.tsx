@@ -21,7 +21,7 @@ export function ViewportFlow({children, pageKey}: {children:ReactNode;pageKey:st
           element.dataset['stage']=entry.isIntersecting?'visible':'hidden';
           element.inert=!entry.isIntersecting;
         }
-      },{root,threshold:0,rootMargin:'-12px 0px -24px 0px'});
+      },{root,threshold:0,rootMargin:"0px 0px -8% 0px"});
       for(const stage of stages){stage.dataset['stage']='hidden';observer.observe(stage);}
     };
     frame=requestAnimationFrame(install);
