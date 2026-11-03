@@ -2,7 +2,9 @@
 
 Import `theme.css`, `presentation.css`, and `motion.css` after Tailwind. Theme roles are defined in one place; Sora is the display face, Nunito the reading face, and JetBrains Mono the terminal face. Load those fonts in the application's document head.
 
-`ViewportFlow` owns the page body: it renders the scrolling `main`, resets scroll on navigation when `pageKey` changes, and reveals each top-level content element out of a light blur as it enters the viewport. Revealed and unrevealed content both stay interactive — nothing is hidden from the keyboard or the pointer. It observes top-level content elements, so route copy does not belong in the motion module.
+`ViewportFlow` owns the page body: it renders the scrolling `main`, resets scroll on navigation when `pageKey` changes, and adds the class that switches reveal motion on once the app has hydrated. Without that class the page reads as plain, unanimated content.
+
+`Stage` is how content joins the reveal. Wrap a top-level block in `<Stage>` (or `<Stage as="header">` / `as="div">`) and it fades up out of a light blur as it enters the viewport, and back out as it leaves. The stage state is a rendered attribute, so server markup and hydration agree, and hidden content stays fully interactive — reachable by keyboard, pointer, and screen reader.
 
 `motion.css` also carries the two shared chrome pieces: the fixed header bar and the corner navigation (`tilde-nav`) whose link line slides out from a tilde on hover or focus.
 
