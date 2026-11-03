@@ -7,6 +7,7 @@ import logo from '@/assets/leritos.svg.asset.json';
 
 const nav = [{to:'/',label:'Overview'}, {to:'/workspace',label:'Workspace'}, {to:'/reactivity',label:'Reactivity'}, {to:'/ecosystem',label:'Ecosystem'}, {to:'/vision',label:'The vision'}] as const;
 export function SiteShell({children}: {children: ReactNode}) {
+  const pathname = useRouterState({select: s => s.location.pathname});
   const footer=<footer className="site-footer"><div className="content-width footer-top"><Link to="/" className="brand"><img src={logo.url} alt=""/>leritos.</Link><p>An environment. Not just an emulator.</p><Button asChild variant="outline"><Link to="/vision">Meet the vision <ArrowUpRight/></Link></Button></div><div className="content-width footer-bottom"><span>A project by <strong>Leraniode</strong></span><span>Designed to be yours.</span><span>Concept in development · 2026</span></div></footer>;
   return <div className="site-shell">
     <header className="site-header"><div className="site-header-inner"><Link to="/" className="brand" aria-label="Leritos home"><img src={logo.url} alt=""/><span>leritos<span className="brand-dot">.</span></span></Link></div></header>
