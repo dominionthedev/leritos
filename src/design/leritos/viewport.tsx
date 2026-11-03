@@ -24,7 +24,7 @@ export function ViewportFlow({children, pageKey}: {children:ReactNode;pageKey:st
     frame=setTimeout(install,0);
     const mutation=new MutationObserver(()=>{clearTimeout(frame);frame=setTimeout(install,0);});
     mutation.observe(root,{childList:true});
-    return ()=>{cancelAnimationFrame(frame);observer?.disconnect();mutation.disconnect();};
+    return ()=>{clearTimeout(frame);observer?.disconnect();mutation.disconnect();};
   },[pageKey]);
   return <main ref={main} className="site-main" id="main-content">{children}</main>;
 }
