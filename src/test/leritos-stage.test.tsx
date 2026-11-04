@@ -18,6 +18,7 @@ class FakeObserver implements IntersectionObserver {
     return [];
   }
 }
+globalThis.IntersectionObserver = FakeObserver as unknown as typeof IntersectionObserver;
 const intersecting = (isIntersecting: boolean) =>
   act(() => lastCallback?.([{ isIntersecting } as IntersectionObserverEntry], {} as IntersectionObserver));
 
