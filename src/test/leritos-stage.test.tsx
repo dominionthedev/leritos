@@ -5,7 +5,7 @@ import { Stage } from "@/design/leritos/stage";
 
 // jsdom has no IntersectionObserver, and the reveal must not depend on one being present.
 let lastCallback: IntersectionObserverCallback | undefined;
-class FakeObserver implements IntersectionObserver {
+class FakeObserver {
   readonly root = null;
   readonly thresholds = [0];
   constructor(callback: IntersectionObserverCallback) {
@@ -18,6 +18,7 @@ class FakeObserver implements IntersectionObserver {
     return [];
   }
 }
+globalThis.IntersectionObserver = FakeObserver as unknown as typeof IntersectionObserver;
 const intersecting = (isIntersecting: boolean) =>
   act(() => lastCallback?.([{ isIntersecting } as IntersectionObserverEntry], {} as IntersectionObserver));
 
