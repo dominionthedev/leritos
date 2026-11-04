@@ -11,5 +11,7 @@
 
 ## UI architecture
 - Keep the reusable visual system in `src/design/leritos`: semantic theme tokens, scoped presentation styles, and viewport motion; page content stays separate so the design can be reused without product copy.
-- Use the shared SiteShell for all content routes, with accessible proximity navigation and repeatable viewport transitions; this keeps interaction and motion consistent across pages.
+- Use the shared SiteShell for all content routes, with accessible proximity navigation; this keeps interaction and motion consistent across pages.
+- Content blocks reveal themselves through the module's `Stage` block, whose state is a rendered attribute — never stamped into the DOM from outside, which is what broke hydration and made off-screen sections unreachable.
+- The page body owns its own scroll: router scroll restoration stays off and `ViewportFlow` decides where each page starts, so two owners never fight over the scroll position.
 - Interactive terminal examples are illustrative client-side studies, not a terminal engine or published product API; retain clear concept status.
